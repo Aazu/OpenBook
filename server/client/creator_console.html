@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<title>OpenBooks • Creator Console</title>
+</head>
+<body data-page="creator">
+
+<div class="topbar">
+  <div class="container topbarInner">
+    <div class="brand">
+      <div class="logoMark"><img src="assets/openbooks_logo.png" alt="OpenBooks logo" style="width:100%;height:100%;object-fit:contain;border-radius:12px"/></div>
+      <div>
+        <div class="brandName">OpenBooks</div>
+        <div class="pill" id="activeUserPill">Loading…</div>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Consumer Portal</a>
+      <a href="creator_console.html">Creator Console</a>
+      <a href="admin_console.html">Admin Console</a>
+      <a href="settings_profile.html">Settings/Profile</a>
+      <a href="tech_status.html">Tech Status</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="heroCard" style="background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(236,72,153,.12));">
+      <h1 class="heroTitle">Creator Studio</h1>
+      <p class="heroSub">Upload a photo and set metadata (Title, Caption, Location, People, Tags). This is a demo with a dummy database stored in your browser.</p>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="container twoCol">
+    <div class="panel">
+      <div class="badgeDot"><span class="dot warn"></span><strong style="font-weight:1000">Upload</strong></div>
+      <div class="note" id="roleWarn" style="display:none;margin-top:10px">
+        You are currently not a Creator/Admin. Go to <a href="settings_profile.html" style="text-decoration:underline">Settings</a> and switch role to Creator.
+      </div>
+
+      <label class="label">Photo</label>
+      <input id="file" type="file" accept="image/*" class="input" />
+
+      <div class="previewBox" id="preview"><span class="note">Preview</span></div>
+
+      <div class="row2">
+        <div>
+          <label class="label">Title</label>
+          <input id="title" class="input" placeholder="e.g., Sunset in London" />
+        </div>
+        <div>
+          <label class="label">Location</label>
+          <input id="location" class="input" placeholder="e.g., London, UK" />
+        </div>
+      </div>
+
+      <label class="label">Caption</label>
+      <textarea id="caption" placeholder="Write a caption…"></textarea>
+
+      <label class="label">People present (comma separated)</label>
+      <input id="people" class="input" placeholder="e.g., Ajay, Sita" />
+
+      <label class="label">Tags (comma separated)</label>
+      <input id="tags" class="input" placeholder="e.g., travel, sunset" />
+
+      <button class="btn btnPrimary" id="btnUpload">Upload</button>
+      <div class="msg" id="msg"></div>
+      <button class="btn" id="btnReset" style="margin-top:10px">Reset demo DB</button>
+      <div class="note">Tip: Uploads are compressed automatically to avoid freezing. If it still fails, your browser storage may be full (see Tech Status).</div>
+    </div>
+
+    <div class="panel">
+      <div class="badgeDot"><span class="dot"></span><strong style="font-weight:1000">My uploads</strong></div>
+      <div class="note">Shows the latest uploads for the active user.</div>
+      <div id="myUploads" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px"></div>
+    </div>
+  </div>
+</section>
+<script src="assets/app.js"></script>
+</body>
+</html>

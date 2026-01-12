@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<title>OpenBooks • Settings & Profile</title>
+</head>
+<body data-page="settings">
+
+<div class="topbar">
+  <div class="container topbarInner">
+    <div class="brand">
+      <div class="logoMark"><img src="assets/openbooks_logo.png" alt="OpenBooks logo" style="width:100%;height:100%;object-fit:contain;border-radius:12px"/></div>
+      <div>
+        <div class="brandName">OpenBooks</div>
+        <div class="pill" id="activeUserPill">Loading…</div>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Consumer Portal</a>
+      <a href="creator_console.html">Creator Console</a>
+      <a href="admin_console.html">Admin Console</a>
+      <a href="settings_profile.html">Settings/Profile</a>
+      <a href="tech_status.html">Tech Status</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="heroCard" style="background: linear-gradient(135deg, rgba(124,58,237,.18), rgba(37,99,235,.12));">
+      <h1 class="heroTitle">Settings & Profile</h1>
+      <p class="heroSub">Switch active user, set display name, and change role (Consumer / Creator / Admin). This is a demo (client-side only).</p>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="container twoCol">
+    <div class="panel">
+      <div class="badgeDot"><span class="dot"></span><strong style="font-weight:1000">Edit current user</strong></div>
+
+      <label class="label">Display name</label>
+      <input id="curName" class="input" />
+
+      <label class="label">Role</label>
+      <select id="curRole" class="input">
+        <option value="consumer">consumer</option>
+        <option value="creator">creator</option>
+        <option value="admin">admin</option>
+      </select>
+
+      <button class="btn btnPrimary" id="btnSaveSettings" style="margin-top:12px">Save</button>
+      <div class="msg" id="msgSettings"></div>
+
+      <div class="note">
+        Recommended for coursework: use roles + auth in cloud (OAuth/Entra/Cognito). Here it's simulated using localStorage.
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="badgeDot"><span class="dot warn"></span><strong style="font-weight:1000">Switch active user</strong></div>
+      <label class="label">Select user</label>
+      <select id="switchUser" class="input"></select>
+      <button class="btn btnBlue" id="btnSwitchUser" style="margin-top:12px">Switch</button>
+      <div class="note">This helps you test Consumer vs Creator vs Admin pages quickly.</div>
+    </div>
+  </div>
+</section>
+<script src="assets/app.js"></script>
+</body>
+</html>
