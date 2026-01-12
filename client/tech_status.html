@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<title>OpenBooks • Tech Status</title>
+</head>
+<body data-page="status">
+
+<div class="topbar">
+  <div class="container topbarInner">
+    <div class="brand">
+      <div class="logoMark"><img src="assets/openbooks_logo.png" alt="OpenBooks logo" style="width:100%;height:100%;object-fit:contain;border-radius:12px"/></div>
+      <div>
+        <div class="brandName">OpenBooks</div>
+        <div class="pill" id="activeUserPill">Loading…</div>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Consumer Portal</a>
+      <a href="creator_console.html">Creator Console</a>
+      <a href="admin_console.html">Admin Console</a>
+      <a href="settings_profile.html">Settings/Profile</a>
+      <a href="tech_status.html">Tech Status</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="heroCard" style="background: linear-gradient(135deg, rgba(6,182,212,.18), rgba(37,99,235,.12));">
+      <h1 class="heroTitle">Tech Status</h1>
+      <p class="heroSub">Shows demo “cloud” service health + your browser storage usage. Useful for explaining scalability components in your coursework.</p>
+      <div class="kpis" style="margin-top:18px">
+        <div class="kpi"><div class="kpiVal" id="statusUser">—</div><div class="kpiLab">Active user</div></div>
+        <div class="kpi"><div class="kpiVal" id="statusPosts">—</div><div class="kpiLab">Posts stored</div></div>
+        <div class="kpi"><div class="kpiVal" id="statusUsers">—</div><div class="kpiLab">Users stored</div></div>
+        <div class="kpi"><div class="kpiVal" id="statusStorage">—</div><div class="kpiLab">localStorage usage</div></div>
+      </div>
+      <div class="heroRow">
+        <button class="btn btnBlue" id="btnExport">Export demo DB (JSON)</button>
+        <button class="btn" id="btnClearStorage">Clear storage + reseed</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="container">
+    <div class="panel">
+      <div class="badgeDot"><span class="dot"></span><strong style="font-weight:1000">Service health (demo)</strong></div>
+      <table class="table" style="margin-top:12px">
+        <thead><tr><th>Service</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody id="svcTbody"></tbody>
+      </table>
+      <div class="note" style="margin-top:10px">
+        In a real cloud-native version you’d use: static hosting + CDN, REST API (Functions), object storage (Blob/S3), database (Cosmos/Firestore/Dynamo), caching (Redis), and role-based auth.
+      </div>
+    </div>
+  </div>
+</section>
+<script src="assets/app.js"></script>
+</body>
+</html>

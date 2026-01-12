@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<title>OpenBooks • Consumer Portal</title>
+</head>
+<body data-page="index">
+
+<div class="topbar">
+  <div class="container topbarInner">
+    <div class="brand">
+      <div class="logoMark"><img src="assets/openbooks_logo.png" alt="OpenBooks logo" style="width:100%;height:100%;object-fit:contain;border-radius:12px"/></div>
+      <div>
+        <div class="brandName">OpenBooks</div>
+        <div class="pill" id="activeUserPill">Loading…</div>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Consumer Portal</a>
+      <a href="creator_console.html">Creator Console</a>
+      <a href="admin_console.html">Admin Console</a>
+      <a href="settings_profile.html">Settings/Profile</a>
+      <a href="tech_status.html">Tech Status</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="heroCard">
+      <h1 class="heroTitle">Discover Amazing Photos</h1>
+      <p class="heroSub">Browse, search, and explore image content shared by creators. View details, rate, like and comment — just like an Instagram-style experience (demo).</p>
+      <div class="heroRow">
+        <div class="searchWrap">
+          🔎 <input id="q" placeholder="Search by title, creator, tags, location, people…" />
+        </div>
+        <button class="btn btnPrimary" onclick="location.href='creator_console.html'">Go to Creator Studio</button>
+        <button class="btn btnBlue" onclick="location.href='settings_profile.html'">Change User / Role</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="kpiVal" id="kpiPosts">—</div><div class="kpiLab">Total posts</div></div>
+        <div class="kpi"><div class="kpiVal" id="kpiCreators">—</div><div class="kpiLab">Creators</div></div>
+        <div class="kpi"><div class="kpiVal" id="kpiLikes">—</div><div class="kpiLab">Total likes</div></div>
+        <div class="kpi"><div class="kpiVal" id="kpiAvg">—</div><div class="kpiLab">Avg rating</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="container">
+    <div class="toolbar">
+      <div class="chips">
+        <button class="chip active" id="chipRecent">Recent</button>
+        <button class="chip" id="chipRating">Top Rated</button>
+      </div>
+      <div class="chips">
+        <button class="btn" id="btnResetDb">Reset demo DB</button>
+        <div class="pill" id="count">—</div>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<div class="modalBack" id="modalBack" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modalTop">
+      <div>
+        <div id="mTitle" style="font-weight:1000">—</div>
+        <div class="muted" id="mMeta">—</div>
+      </div>
+      <button class="btn" id="btnCloseModal">Close</button>
+    </div>
+    <div class="modalBody">
+      <div class="modalImg"><img id="mImg" alt="photo"/></div>
+      <div class="modalSide">
+        <div class="panel" style="padding:14px">
+          <div class="row2">
+            <div><div class="label">Location</div><div id="mLocation" style="font-weight:950">—</div></div>
+            <div><div class="label">People</div><div id="mPeople" style="font-weight:950">—</div></div>
+          </div>
+          <div class="label">Caption</div>
+          <div id="mCaption" style="font-weight:900;color:var(--muted);line-height:1.45">—</div>
+
+          <div class="label">Tags</div>
+          <div id="mTags" class="tags"></div>
+
+          <div class="actionRow">
+            <button class="likeBtn" id="btnLike">♥ Like</button>
+            <div class="pill">Rating: <span id="mRating">—</span></div>
+          </div>
+
+          <div class="label">Your rating</div>
+          <div class="starBtns" id="starBtns"></div>
+
+          <div class="label">Add a comment</div>
+          <div class="commentRow">
+            <input class="input" id="commentText" placeholder="Write something nice…" />
+            <button class="btn btnBlue" id="btnComment">Post</button>
+          </div>
+          <div id="mComments"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

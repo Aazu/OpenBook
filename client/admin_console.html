@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<title>OpenBooks • Admin Console</title>
+</head>
+<body data-page="admin">
+
+<div class="topbar">
+  <div class="container topbarInner">
+    <div class="brand">
+      <div class="logoMark"><img src="assets/openbooks_logo.png" alt="OpenBooks logo" style="width:100%;height:100%;object-fit:contain;border-radius:12px"/></div>
+      <div>
+        <div class="brandName">OpenBooks</div>
+        <div class="pill" id="activeUserPill">Loading…</div>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Consumer Portal</a>
+      <a href="creator_console.html">Creator Console</a>
+      <a href="admin_console.html">Admin Console</a>
+      <a href="settings_profile.html">Settings/Profile</a>
+      <a href="tech_status.html">Tech Status</a>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="heroCard" style="background: linear-gradient(135deg, rgba(37,99,235,.22), rgba(6,182,212,.10));">
+      <h1 class="heroTitle">Admin Console</h1>
+      <p class="heroSub">Manage creator users and moderate posts (publish/unpublish/delete). Demo-only: roles are stored in localStorage.</p>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="container">
+    <div class="note" id="adminWarn" style="display:none;margin-bottom:12px">
+      You are not an Admin. Go to <a href="settings_profile.html" style="text-decoration:underline">Settings</a> and switch role to Admin to use admin actions.
+    </div>
+
+    <div class="twoCol">
+      <div class="panel">
+        <div class="badgeDot"><span class="dot"></span><strong style="font-weight:1000">Creator users</strong></div>
+        <div class="row2" style="margin-top:12px">
+          <div>
+            <label class="label">Add new creator (name)</label>
+            <input id="newCreatorName" class="input" placeholder="e.g., New Creator" />
+          </div>
+          <div style="display:flex;align-items:flex-end">
+            <button class="btn btnBlue" id="btnAddCreator" style="width:100%">Add Creator</button>
+          </div>
+        </div>
+        <div class="msg" id="msgAdmin"></div>
+
+        <table class="table" style="margin-top:12px">
+          <thead><tr><th>Name</th><th>Role</th><th>Actions</th></tr></thead>
+          <tbody id="usersTbody"></tbody>
+        </table>
+        <button class="btn" id="btnResetAdmin" style="margin-top:12px">Reset demo DB</button>
+      </div>
+
+      <div class="panel">
+        <div class="badgeDot"><span class="dot warn"></span><strong style="font-weight:1000">Posts moderation</strong></div>
+        <div class="note">Publish/unpublish affects what consumers can see.</div>
+        <table class="table" style="margin-top:12px">
+          <thead><tr><th>Title</th><th>Creator</th><th>Status</th><th>Stats</th><th>Actions</th></tr></thead>
+          <tbody id="postsTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="assets/app.js"></script>
+</body>
+</html>
