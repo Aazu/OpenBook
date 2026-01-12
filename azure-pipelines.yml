@@ -1,17 +1,66 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
-- main
+  branches:
+    include:
+      - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: "ubuntu-latest"
 
 variables:
-  buildConfiguration: 'Release'
+  - group: openbooks-secrets
+  - name: node_version
+    value: "20.x"
+  - name: azureServiceConnection
+    value: "openbooks-azure-sc"
+  - name: webAppName
+    value: "openbooks-api"
+  - name: resourceGroup
+    value: "openbooks-rg"
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+  # Use Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "$(node_version)"
+    displayName: "Use Node.js $(node_version)"
+
+  # Install backend dependencies
+  - script: |
+      cd server
+      npm install
+    displayName: "Install server dependencies"
+
+  # Zip backend for deployment
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: "server"
+      includeRootFolder: false
+      archiveType: "zip"
+      archiveFile: "$(Build.ArtifactStagingDirectory)/server.zip"
+      replaceExistingArchive: true
+    displayName: "Package backend"
+
+  # Configure App Service environment variables
+  - task: AzureAppServiceSettings@1
+    inputs:
+      azureSubscription: "$(azureServiceConnection)"
+      appName: "$(webAppName)"
+      resourceGroupName: "$(resourceGroup)"
+      appSettings: |
+        [
+          { "name": "PORT", "value": "3000", "slotSetting": false },
+          { "name": "STORAGE_PROVIDER", "value": "$(STORAGE_PROVIDER)", "slotSetting": false },
+          { "name": "DB_PROVIDER", "value": "$(DB_PROVIDER)", "slotSetting": false },
+          { "name": "AZURE_BLOB_CONTAINER", "value": "$(AZURE_BLOB_CONTAINER)", "slotSetting": false },
+          { "name": "AZURE_STORAGE_CONNECTION_STRING", "value": "$(AZURE_STORAGE_CONNECTION_STRING)", "slotSetting": false },
+          { "name": "COSMOS_CONNECTION_STRING", "value": "$(COSMOS_CONNECTION_STRING)", "slotSetting": false }
+        ]
+    displayName: "Configure App Service settings"
+
+  # Deploy to Azure App Service
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: "$(azureServiceConnection)"
+      appName: "$(webAppName)"
+      package: "$(Build.ArtifactStagingDirectory)/server.zip"
+    displayName: "Deploy OpenBooks API"
