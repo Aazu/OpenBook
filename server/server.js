@@ -53,7 +53,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use("/uploads", express.static(UPLOAD_DIR, { maxAge: "1d" }));
-app.use("/", express.static(path.join(ROOT, "..", "client"), { maxAge: 0 }));
+app.use("/", express.static(path.join(ROOT, "client"), { maxAge: 0 }));
 
 // Very simple "session": current user id stored in db.json (demo only)
 async function loadDB() {
@@ -399,10 +399,12 @@ app.get("/api/status", (req,res)=>{
 });
 
 // SPA-ish fallback: serve consumer portal
-app.get("*", (req,res)=>{
-  res.sendFile(path.join(ROOT, "..", "client", "index.html"));
+app.get("*", (req, res) => {
+  if (req.path.startsWith("/api") || req.path.startsWith("/uploads")) {
+    return res.status(404).json({ error: "Not found" });
+  }
+  res.sendFile(path.join(ROOT, "client", "index.html"));
 });
-
 app.listen(PORT, ()=>{
   console.log(`OpenBooks server running on http://localhost:${PORT}`);
 });
